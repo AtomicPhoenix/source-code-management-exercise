@@ -6,7 +6,9 @@ def gcd(a: int, b: int) -> int:
     a = abs(a)
     b = abs(b)
     # Implement your solution here
-    if a == 0:
+    if a == 0 and b == 0:
+        return None  # gcd(0,0) is undefined
+    elif a == 0:
         return b
     elif b == 0:
         return a
@@ -16,7 +18,7 @@ def gcd(a: int, b: int) -> int:
         return gcd(a % b, b)
 
 
-def test_gcd(a: int, b: int, g: int):
+def test_gcd(a: int, b: int, g: int | None):
     res = gcd(a, b)
     passed = "PASSED" if res == g else "FAILED"
     print(a, b, "\t|\t", g, "\t|\t", res, "\t|\t", passed)
@@ -30,7 +32,5 @@ test_gcd(7, 54, 1)
 test_gcd(17, 34, 17)
 test_gcd(34, 17, 17)
 test_gcd(30, 0, 30)  # Any number times 0 = 0 so all numbers are factors of 0
-test_gcd(
-    0, 0, 0
-)  # Could also be undefined but we can't modify function signature to return none
+test_gcd(0, 0, None)  # gcd(0,0) is undefined
 test_gcd(100, 20, 20)
